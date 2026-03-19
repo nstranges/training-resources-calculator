@@ -7,12 +7,18 @@ model:
   bytes_per_parameter: 2
 
 training:
+  show_training: True
   train_gpus: 4
   zero_stage: 3
   train_batch_size: 4
-  estimated_overhead_percent: 50
+  train_overhead_percent: 50
 
 inference:
+  show_inference: False
   infer_gpus: 2
   infer_batch_size: 2
-  estimated_overhead_percent: 50
+  infer_overhead_percent: 50
+
+lora:
+  use_lora: True
+  rank: 256
