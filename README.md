@@ -6,7 +6,10 @@ A Python-based utility to estimate VRAM requirements for Large Language Models. 
 
 This project is optimized for [uv](https://github.com/astral-sh/uv). You don't need to manually create virtual environments or install dependencies; `uv` handles it on the fly.
 
-### 1. Run the Calculator
-Ensure you have a `config.yaml` in the root directory, then run:
+### 1. Setup for your config
+Edit the `config.yaml` to match the model type and setup you're using.
+
+### 2. Run the Calculator
+Ensure `config.yaml` is in the root directory, then run:
 ```bash
 uv run calculator.py
