@@ -1,0 +1,18 @@
+model:
+  model_params_b: 12
+  hidden_size: 3840
+  layers: 48
+  kv_heads: 8
+  head_dim: 240
+  bytes_per_parameter: 2
+
+training:
+  train_gpus: 4
+  zero_stage: 3
+  train_batch_size: 4
+  estimated_overhead_percent: 50
+
+inference:
+  infer_gpus: 2
+  infer_batch_size: 2
+  estimated_overhead_percent: 50
