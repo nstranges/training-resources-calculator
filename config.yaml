@@ -14,7 +14,7 @@ training:
   train_overhead_percent: 50
 
 inference:
-  show_inference: False
+  show_inference: True
   infer_gpus: 2
   infer_batch_size: 2
   infer_overhead_percent: 50

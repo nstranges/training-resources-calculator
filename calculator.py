@@ -2,7 +2,7 @@ import yaml
 import matplotlib.pyplot as plt
 
 class MemoryCalculator():
-    def __int__(self):
+    def __init__(self):
         self.config = self.load_config('config.yaml')
 
         # --- Model Parameters ---
@@ -132,6 +132,7 @@ class MemoryCalculator():
             plt.ylabel('VRAM Usage (GB)')
             plt.title('VRAM Vs Context Length')
             plt.legend()
+            plt.grid(True)
             plt.show()
         else:
             print("Both training and inference are not selected")
