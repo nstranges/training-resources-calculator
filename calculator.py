@@ -46,17 +46,17 @@ class MemoryCalculator():
         # Weights of the model for forward
         model_weights = self.model_params_b * self.bytes_per_param
 
-        # The activations of the model for backprop
-        model_activations = self.model_params_b * self.bytes_per_param
+        # The activations of the model for backprop. Same space for gradients as they replace the activations
+        model_activations_or_gradients = self.model_params_b * self.bytes_per_param
 
         # Extra info stored for Adam. These params are usually stored in fp32 (4 bytes per param). 2 moments are used. 8 bytes per param
         adam_params = self.model_params_b * 8
 
         # Only zero stage 3 spreads the weights across every gpu
         if self.zero_stage == 3:
-            total_gb = (model_weights + model_activations + adam_params) / self.train_gpus
+            total_gb = (model_weights + model_activations_or_gradients + adam_params) / self.train_gpus
         else:
-            total_gb = model_weights + ((model_activations + adam_params) / self.train_gpus)
+            total_gb = model_weights + ((model_activations_or_gradients + adam_params) / self.train_gpus)
 
         return total_gb
     
@@ -69,7 +69,7 @@ class MemoryCalculator():
 
         return total_gb
     
-    # Context dependedent VRAM for training
+    # Context dependedent VRAM for training. Assuming the use of flash attention
     def train_context_dependent(self, context_len):
         total_gb = (2 * self.train_batch_size * context_len * self.hidden_size * self.layers * self.bytes_per_param) / (1024**3)
 
