@@ -98,7 +98,7 @@ class MemoryCalculator():
         total_gbs = []
 
         for context in self.context_sizes:
-            total_gb = (base + self.train_context_dependent(context_len=context)) * (self.train_overhead / 100)
+            total_gb = (base + self.train_context_dependent(context_len=context)) * (1 + (self.train_overhead / 100))
                         
             total_gbs.append(total_gb)
 
@@ -111,7 +111,7 @@ class MemoryCalculator():
         total_gbs = []
 
         for context in self.context_sizes:
-            total_gb = (base + self.infer_context_dependent(context_len=context)) * (self.infer_overhead / 100)
+            total_gb = (base + self.infer_context_dependent(context_len=context)) * (1 + (self.infer_overhead / 100))
                         
             total_gbs.append(total_gb)
 
@@ -132,6 +132,7 @@ class MemoryCalculator():
             plt.ylabel('VRAM Usage (GB)')
             plt.title('VRAM Vs Context Length')
             plt.legend()
+            plt.ylim(bottom=0)
             plt.grid(True)
             plt.show()
         else:
